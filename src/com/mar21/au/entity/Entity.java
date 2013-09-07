@@ -5,7 +5,7 @@ import java.util.Random;
 import com.mar21.au.graphics.Screen;
 import com.mar21.au.level.Level;
 
-public abstract class Entity {
+public abstract class Entity{
 
 	public int x, y;
 	private boolean removed = false;

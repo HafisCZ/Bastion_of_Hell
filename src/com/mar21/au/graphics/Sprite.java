@@ -14,7 +14,8 @@ public class Sprite {
 	
 	public static Sprite voidSprite = new Sprite(16, 0x1b87e0);
 	
-	public static Sprite footprint = new Sprite(16, 1, 2,SpriteSheet.tiles);
+	public static Sprite footprint = new Sprite(16, 0, 2,SpriteSheet.tiles);
+	public static Sprite endrock = new Sprite(16, 1, 2, SpriteSheet.tiles);
 	
 	public static Sprite player0 = new Sprite(32, 0, 5, SpriteSheet.tiles);
 	public static Sprite player1 = new Sprite(32, 1, 5, SpriteSheet.tiles);

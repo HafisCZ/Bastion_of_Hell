@@ -3,9 +3,9 @@ package com.mar21.au.level.tile;
 import com.mar21.au.graphics.Screen;
 import com.mar21.au.graphics.Sprite;
 
-public class TileFootPrint extends Tile {
+public class TileFootDeadly extends Tile {
 
-	public TileFootPrint(Sprite sprite) {
+	public TileFootDeadly(Sprite sprite) {
 		super(sprite);
 	}
 

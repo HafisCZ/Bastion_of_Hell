@@ -23,6 +23,9 @@ public class Game extends Canvas implements Runnable {
 	public static int width = 300;
 	public static int height = width / 16 * 9;
 	public static int scale = 3;
+	
+	public static final String NAME = "";
+	public static final String VERSION = "1B002";
 
 	private Thread thread;
 	private JFrame frame;
@@ -45,8 +48,8 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(width, height);
 		frame = new JFrame();
 		key = new Keyboard();
-		level = new SpawnLevel("/textures/level.png");
-		player = new Player(8*16, 8*16, key);
+		level = new SpawnLevel("/textures/levels/level.png");
+		player = new Player(128, 128, key);
 		
 		addKeyListener(key);
 	}
@@ -134,7 +137,7 @@ public class Game extends Canvas implements Runnable {
 	public static void main(String[] args) {
 		Game game = new Game();
 		game.frame.setResizable(false);
-		game.frame.setTitle("title");
+		game.frame.setTitle(NAME + " " + VERSION);
 		game.frame.add(game);
 		game.frame.pack();
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

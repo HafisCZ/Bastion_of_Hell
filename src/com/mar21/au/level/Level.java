@@ -46,25 +46,54 @@ public class Level {
 
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
+				if (getTile(x, y).layer()) {
+					if (getTile(x - 1, y) != Tile.voidTile
+							&& getTile(x - 1, y) != getTile(x, y)) {
+						getTile(x - 1, y).render(x, y, screen);
+					} else if (getTile(x + 1, y) != Tile.voidTile
+							&& getTile(x + 1, y) != getTile(x, y)) {
+						getTile(x + 1, y).render(x, y, screen);
+					} else if (getTile(x, y - 1) != Tile.voidTile
+							&& getTile(x, y - 1) != getTile(x, y)) {
+						getTile(x, y - 1).render(x, y, screen);
+					} else if (getTile(x, y + 1) != Tile.voidTile
+							&& getTile(x, y + 1) != getTile(x, y)) {
+						getTile(x, y + 1).render(x, y, screen);
+					} else if (getTile(x + 2, y) != Tile.voidTile
+							&& getTile(x + 2, y) != getTile(x, y)) {
+						getTile(x + 2, y).render(x, y, screen);
+					} else if (getTile(x - 2, y) != Tile.voidTile
+							&& getTile(x - 2, y) != getTile(x, y)) {
+						getTile(x - 2, y).render(x, y, screen);
+					} else if (getTile(x, y - 2) != Tile.voidTile
+							&& getTile(x, y - 2) != getTile(x, y)) {
+						getTile(x, y - 2).render(x, y, screen);
+					} else if (getTile(x, y + 2) != Tile.voidTile
+							&& getTile(x, y + 2) != getTile(x, y)) {
+						getTile(x, y + 2).render(x, y, screen);
+					} else {
+						Tile.voidTile.render(x, y, screen);
+					}
+				}
 				getTile(x, y).render(x, y, screen);
 			}
 		}
 	}
-	
+
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) {
 			return Tile.voidTile;
 		}
-		if (tiles[x + y * width] == 0xFFFF0000){
+		if (tiles[x + y * width] == 0xFFFF0000) {
 			return Tile.grass;
 		}
-		if (tiles[x + y * width] == 0xFFFFFF00){
+		if (tiles[x + y * width] == 0xFFFFFF00) {
 			return Tile.grass1;
 		}
-		if (tiles[x + y * width] == 0xFF00FFFF){
+		if (tiles[x + y * width] == 0xFF00FFFF) {
 			return Tile.grass2;
 		}
-		if (tiles[x + y * width] == 0xFF00FF00){
+		if (tiles[x + y * width] == 0xFF00FF00) {
 			return Tile.footprint;
 		}
 		return Tile.voidTile;
