@@ -1,8 +1,12 @@
 package com.mar21.au.entity.mob;
 
+import com.mar21.au.Game;
+import com.mar21.au.entity.projectile.HoleProjectile;
+import com.mar21.au.entity.projectile.Projectile;
 import com.mar21.au.graphics.Screen;
 import com.mar21.au.graphics.Sprite;
 import com.mar21.au.input.Keyboard;
+import com.mar21.au.input.Mouse;
 
 public class Player extends Mob {
 
@@ -11,9 +15,12 @@ public class Player extends Mob {
 	private int anim = 0;
 	private boolean walking = false;
 
+	private int rate = 0;
+
 	public Player(Keyboard input) {
 		this.input = input;
 		sprite = Sprite.player0;
+		rate = HoleProjectile.RATE;
 	}
 
 	public Player(int x, int y, Keyboard input) {
@@ -21,9 +28,12 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		sprite = Sprite.player0;
+		rate = HoleProjectile.RATE;
 	}
 
 	public void update() {
+		if (rate > 0)
+			rate--;
 		int xa = 0, ya = 0;
 		if (anim < 7500)
 			anim++;
@@ -37,12 +47,32 @@ public class Player extends Mob {
 			xa--;
 		if (input.right)
 			xa++;
-
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);
 			walking = true;
 		} else {
 			walking = false;
+		}
+
+		clear();
+		updateShooting();
+	}
+
+	private void updateShooting() {
+		if (Mouse.getButton() == 1 && rate <= 0) {
+			double dx = Mouse.getX() - Game.getWWidth() / 2;
+			double dy = Mouse.getY() - Game.getWHeight() / 2;
+			double d = Math.atan2(dy, dx);
+			shoot(x, y, d);
+			rate = HoleProjectile.RATE;
+		}
+	}
+
+	private void clear() {
+		for (int i = 0; i < level.getProjectiles().size(); i++) {
+			Projectile p = level.getProjectiles().get(i);
+			if (p.isRemoved())
+				level.getProjectiles().remove(i);
 		}
 	}
 

@@ -1,5 +1,10 @@
 package com.mar21.au.level;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mar21.au.entity.Entity;
+import com.mar21.au.entity.projectile.Projectile;
 import com.mar21.au.graphics.Screen;
 import com.mar21.au.level.tile.Tile;
 
@@ -8,7 +13,10 @@ public class Level {
 	protected int width, height;
 	protected int[] tilesInt;
 	protected int[] tiles;
-
+	
+	private List<Entity> entities = new ArrayList<Entity>();
+	private List<Projectile> projectiles = new ArrayList<Projectile>();
+	
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -22,17 +30,38 @@ public class Level {
 		generateLevel();
 	}
 
+	public List<Projectile> getProjectiles() {
+		return projectiles;
+	}
+	
 	protected void generateLevel() {
 	}
 
 	protected void loadLevel(String path) {
 
 	}
-
-	public void update() {
-
+	
+	public long getPCount() {
+		return projectiles.size();
 	}
 
+	public void update() {
+		for (int i = 0; i < entities.size(); i++){
+			entities.get(i).update();
+		}
+		for (int i = 0; i < projectiles.size(); i++){
+			projectiles.get(i).update();
+		}
+	}
+	
+	public void add(Entity e) {
+		entities.add(e);
+	}
+
+	public void addProjectile(Projectile p){
+		projectiles.add(p);
+	}
+	
 	private void time() {
 
 	}
@@ -78,6 +107,13 @@ public class Level {
 				getTile(x, y).render(x, y, screen);
 			}
 		}
+		
+		for (int i = 0; i < entities.size(); i++){
+			entities.get(i).render(screen);
+		}
+		for (int i = 0; i < projectiles.size(); i++){
+			projectiles.get(i).render(screen);
+		}
 	}
 
 	public Tile getTile(int x, int y) {
@@ -93,8 +129,14 @@ public class Level {
 		if (tiles[x + y * width] == 0xFF00FFFF) {
 			return Tile.grass2;
 		}
-		if (tiles[x + y * width] == 0xFF00FF00) {
-			return Tile.footprint;
+		if (tiles[x + y * width] == 0xFF000000) {
+			return Tile.rock;
+		}
+		if (tiles[x + y * width] == 0xFFFF6A00) {
+			return Tile.planks;
+		}
+		if (tiles[x + y * width] == 0xFFFFD800) {
+			return Tile.doors;
 		}
 		return Tile.voidTile;
 	}

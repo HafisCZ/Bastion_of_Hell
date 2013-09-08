@@ -11,11 +11,10 @@ public class Sprite {
 	public static Sprite grass1 = new Sprite(16, 1, 0, SpriteSheet.tiles);
 	public static Sprite grass2 = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	public static Sprite rock = new Sprite(16, 3, 0, SpriteSheet.tiles);
+	public static Sprite planks = new Sprite(16, 0, 3, SpriteSheet.tiles);
+	public static Sprite doors = new Sprite(16, 1, 3, SpriteSheet.tiles);
 	
 	public static Sprite voidSprite = new Sprite(16, 0x1b87e0);
-	
-	public static Sprite footprint = new Sprite(16, 0, 2,SpriteSheet.tiles);
-	public static Sprite endrock = new Sprite(16, 1, 2, SpriteSheet.tiles);
 	
 	public static Sprite player0 = new Sprite(32, 0, 5, SpriteSheet.tiles);
 	public static Sprite player1 = new Sprite(32, 1, 5, SpriteSheet.tiles);
@@ -26,6 +25,8 @@ public class Sprite {
 	public static Sprite player1b = new Sprite(32, 1, 7, SpriteSheet.tiles);
 	public static Sprite player2a = new Sprite(32, 2, 6, SpriteSheet.tiles);
 	public static Sprite player2b = new Sprite(32, 2, 7, SpriteSheet.tiles);
+	
+	public static Sprite pFire = new Sprite(16, 0, 0, SpriteSheet.attack);
 	
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;

@@ -14,6 +14,9 @@ public class SpriteSheet {
 	public static SpriteSheet tiles = new SpriteSheet(
 			"/textures/sheets/spritesheet.png", 256);
 
+	public static SpriteSheet attack = new SpriteSheet(
+			"/textures/sheets/projectiles.png", 48);
+
 	public SpriteSheet(String path, int size) {
 		this.path = path;
 		SIZE = size;

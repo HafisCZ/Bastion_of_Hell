@@ -8,24 +8,24 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.mar21.au.entity.mob.Player;
 import com.mar21.au.graphics.Screen;
 import com.mar21.au.input.Keyboard;
+import com.mar21.au.input.Mouse;
 import com.mar21.au.level.Level;
 import com.mar21.au.level.SpawnLevel;
+import com.mar21.au.level.TileCoord;
 
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	public static int width = 300;
-	public static int height = width / 16 * 9;
+	private static int width = 300;
+	private static int height = width / 16 * 9;
 	public static int scale = 3;
-	
+
 	public static final String NAME = "";
 	public static final String VERSION = "1B002";
 
@@ -43,6 +43,14 @@ public class Game extends Canvas implements Runnable {
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer())
 			.getData();
 
+	public static int getWWidth() {
+		return width * scale;
+	}
+	
+	public static int getWHeight() {
+		return height * scale;
+	}
+
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
@@ -51,9 +59,14 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		level = new SpawnLevel("/textures/levels/level.png");
-		player = new Player(128, 128, key);
-		
+		TileCoord pS = new TileCoord(15, 15);
+		player = new Player(pS.x(), pS.y(), key);
+		player.init(level);
+
 		addKeyListener(key);
+		Mouse mouse = new Mouse();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
 	}
 
 	public synchronized void start() {
@@ -106,6 +119,7 @@ public class Game extends Canvas implements Runnable {
 	public void update() {
 		key.update();
 		player.update();
+		level.update();
 	}
 
 	public void render() {
@@ -131,6 +145,9 @@ public class Game extends Canvas implements Runnable {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Verdana", 0, 14));
 			g.drawString("X: " + player.x + " Y: " + player.y, 10, 20);
+			g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " B: "
+					+ Mouse.getButton(), 10, 40);
+			g.drawString("C: " + level.getPCount(), 10, 60);
 		}
 		g.dispose();
 		bs.show();

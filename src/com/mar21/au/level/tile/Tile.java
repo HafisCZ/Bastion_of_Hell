@@ -13,10 +13,10 @@ public class Tile {
 	public static Tile grass1 = new TileGrass1(Sprite.grass1);
 	public static Tile grass2 = new TileGrass2(Sprite.grass2);
 	// WALKABLE OVER-BLOCKS
-	public static Tile footprint = new TileFootPrint(Sprite.footprint);
-	public static Tile deadly = new TileFootDeadly(Sprite.footprint);
 	// UNWALKABLE BLOCKS
 	public static Tile rock = new TileRock(Sprite.rock);
+	public static Tile planks = new TilePlanks(Sprite.planks);
+	public static Tile doors = new TileDoors(Sprite.doors);
 	// NULL BLOCKS
 	public static Tile voidTile = new TileVoid(Sprite.voidSprite);
 
@@ -30,7 +30,7 @@ public class Tile {
 	public boolean solid() {
 		return false;
 	}
-	
+
 	public boolean layer() {
 		return false;
 	}
