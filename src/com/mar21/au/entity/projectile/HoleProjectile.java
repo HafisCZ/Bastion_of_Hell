@@ -12,19 +12,22 @@ public class HoleProjectile extends Projectile {
 		range = random.nextInt(100) + 150;
 		dmg = 20;
 		speed = 4;
-		sprite = Sprite.pFire;
+		sprite = Sprite.p7;
 
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
 	}
 
 	public void update() {
+		if (level.tileCollision(x, y, nx, ny, 8)) remove();
 		move();
 	}
 
 	protected void move() {
-		x += nx;
-		y += ny;
+		if (!level.tileCollision(x, y, nx, ny, 8)) {
+			x += nx;
+			y += ny;
+		}
 		if (distance() > range)
 			remove();
 	}

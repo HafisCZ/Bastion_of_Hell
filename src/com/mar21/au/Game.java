@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import com.mar21.au.entity.mob.Player;
 import com.mar21.au.graphics.Screen;
+import com.mar21.au.graphics.Sprite;
 import com.mar21.au.input.Keyboard;
 import com.mar21.au.input.Mouse;
 import com.mar21.au.level.Level;
@@ -46,7 +47,7 @@ public class Game extends Canvas implements Runnable {
 	public static int getWWidth() {
 		return width * scale;
 	}
-	
+
 	public static int getWHeight() {
 		return height * scale;
 	}
@@ -134,6 +135,9 @@ public class Game extends Canvas implements Runnable {
 		int yScroll = player.y - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
 		player.render(screen);
+
+		Sprite sprite = new Sprite(80, height, 0xFFFFFF6B);
+		screen.renderSprite(width - 20, 0, sprite, false);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

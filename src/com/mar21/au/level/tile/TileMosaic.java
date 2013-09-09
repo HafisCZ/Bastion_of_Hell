@@ -3,9 +3,9 @@ package com.mar21.au.level.tile;
 import com.mar21.au.graphics.Screen;
 import com.mar21.au.graphics.Sprite;
 
-public class TilePlanks extends Tile {
+public class TileMosaic extends Tile {
 
-	public TilePlanks(Sprite sprite) {
+	public TileMosaic(Sprite sprite) {
 		super(sprite);
 	}
 

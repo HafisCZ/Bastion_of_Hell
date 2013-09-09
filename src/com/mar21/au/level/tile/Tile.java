@@ -14,9 +14,9 @@ public class Tile {
 	public static Tile grass2 = new TileGrass2(Sprite.grass2);
 	// WALKABLE OVER-BLOCKS
 	// UNWALKABLE BLOCKS
-	public static Tile rock = new TileRock(Sprite.rock);
-	public static Tile planks = new TilePlanks(Sprite.planks);
-	public static Tile doors = new TileDoors(Sprite.doors);
+	public static Tile rock = new TileRock(Sprite.brick);
+	public static Tile planks = new TileMosaic(Sprite.mosaic);
+	public static Tile doors = new TileDoors(Sprite.mosaic1);
 	// NULL BLOCKS
 	public static Tile voidTile = new TileVoid(Sprite.voidSprite);
 
