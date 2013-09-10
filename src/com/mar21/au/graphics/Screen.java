@@ -50,6 +50,22 @@ public class Screen {
 			}
 		}
 	}
+	
+	public void renderSpriteSheet(int xp, int yp, SpriteSheet sheet, boolean fixed, boolean transparency) {
+		if (fixed) {
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		for (int y = 0; y < sheet.HEIGHT; y++) {
+			int ya = y + yp;
+			for (int x = 0; x < sheet.WIDTH; x++) {
+				int xa = x + xp;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+				if (transparency && sheet.pixels[x + y * sheet.WIDTH] == 0xffff00ff) continue;
+				pixels[xa + ya * width] = sheet.pixels[x + y * sheet.WIDTH];
+			}
+		}
+	}
 
 	public void renderTile(int xp, int yp, Tile tile) {
 		xp -= xOffset;

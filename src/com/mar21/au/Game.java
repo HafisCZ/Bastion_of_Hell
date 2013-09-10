@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import com.mar21.au.entity.mob.Player;
 import com.mar21.au.graphics.Screen;
 import com.mar21.au.graphics.Sprite;
+import com.mar21.au.graphics.SpriteSheet;
 import com.mar21.au.input.Keyboard;
 import com.mar21.au.input.Mouse;
 import com.mar21.au.level.Level;
@@ -135,7 +136,7 @@ public class Game extends Canvas implements Runnable {
 		int yScroll = player.y - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
 		player.render(screen);
-
+		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}
