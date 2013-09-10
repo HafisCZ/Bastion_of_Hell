@@ -2,7 +2,7 @@
 It is a game with Magic with Meadieval theme. And of course with Multiplayer support.
 
 //Made by:
-HafisCZ[mar21] - Code & Textures
+HafisCZ - Code & Textures
 
 //Special Thanks to:
 TheChernoProject [http://www.youtube.com/user/TheChernoProject]
