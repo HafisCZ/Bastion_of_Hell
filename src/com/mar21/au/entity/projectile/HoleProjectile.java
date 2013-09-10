@@ -1,12 +1,13 @@
 package com.mar21.au.entity.projectile;
 
+import com.mar21.au.entity.spawner.ParticleSpawner;
 import com.mar21.au.graphics.Screen;
 import com.mar21.au.graphics.Sprite;
 
 public class HoleProjectile extends Projectile {
 
-	public static final int RATE = 15;
-	
+	public static final int RATE = 10;
+
 	public HoleProjectile(int x, int y, double dir) {
 		super(x, y, dir);
 		range = random.nextInt(100) + 150;
@@ -19,15 +20,16 @@ public class HoleProjectile extends Projectile {
 	}
 
 	public void update() {
-		if (level.tileCollision(x, y, nx, ny, 8)) remove();
+		if (level.pixelCollision((int) (x + nx), (int) (y + ny), 8, 4, 5)) {
+			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
+			remove();
+		}
 		move();
 	}
 
 	protected void move() {
-		if (!level.tileCollision(x, y, nx, ny, 8)) {
 			x += nx;
 			y += ny;
-		}
 		if (distance() > range)
 			remove();
 	}

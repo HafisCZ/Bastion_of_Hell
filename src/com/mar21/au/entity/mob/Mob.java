@@ -1,9 +1,7 @@
 package com.mar21.au.entity.mob;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mar21.au.entity.Entity;
+import com.mar21.au.entity.particle.Particle;
 import com.mar21.au.entity.projectile.HoleProjectile;
 import com.mar21.au.entity.projectile.Projectile;
 import com.mar21.au.graphics.Sprite;
@@ -41,7 +39,7 @@ public abstract class Mob extends Entity {
 
 	protected void shoot(int x, int y, double dir) {
 		Projectile p = new HoleProjectile(x, y, dir);
-		level.addProjectile(p);
+		level.add(p);
 	}
 
 	private boolean collision(int xa, int ya) {

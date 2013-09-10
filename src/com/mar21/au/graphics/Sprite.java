@@ -31,9 +31,13 @@ public class Sprite {
 
 	public static Sprite pFire = new Sprite(16, 2, 1, SpriteSheet.attack);
 	public static Sprite p7 = new Sprite(16, 0, 2, SpriteSheet.attack);
-
+	
+	public static Sprite particle = new Sprite(2, 0x101010);
+	
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
+		w = SIZE;
+		h = SIZE;
 		pixels = new int[SIZE * SIZE];
 		this.x = x * size;
 		this.y = y * size;
@@ -43,6 +47,8 @@ public class Sprite {
 
 	public Sprite(int size, int colour) {
 		SIZE = size;
+		w = SIZE;
+		h = SIZE;
 		pixels = new int[SIZE * SIZE];
 		setColour(colour);
 	}
