@@ -16,8 +16,14 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private int anim = 0;
 	private boolean walking = false;
-	private AnimatedSprite test = new AnimatedSprite(SpriteSheet.player_down, 3);
-
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 3);
+	private AnimatedSprite animSprite = down;
+	
+	int tick;
+	
 	private int rate = 0;
 
 	public Player(Keyboard input) {
@@ -35,7 +41,15 @@ public class Player extends Mob {
 	}
 
 	public void update() {
-		test.update();
+		if (walking && tick >= 10){
+			animSprite.update();
+			tick = 0;
+		} else if (!walking) {
+			animSprite.setFrame(0);
+		}
+		
+		tick++;
+		
 		if (rate > 0)
 			rate--;
 		int xa = 0, ya = 0;
@@ -43,14 +57,21 @@ public class Player extends Mob {
 			anim++;
 		else
 			anim = 0;
-		if (input.up)
+		if (input.up){
 			ya--;
-		if (input.down)
+			animSprite = up;
+		} else if (input.down){
 			ya++;
-		if (input.left)
+			animSprite = down;
+		}
+		if (input.left){
 			xa--;
-		if (input.right)
+			animSprite = left;
+		} else if (input.right){
 			xa++;
+			animSprite = right;
+		}
+		
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);
 			walking = true;
@@ -81,42 +102,8 @@ public class Player extends Mob {
 	}
 
 	public void render(Screen screen) {
-		int flip = 0;
-		if (dir == 0) {
-			sprite = Sprite.player0;
-			if (walking) {
-				if (anim % 20 > 10) {
-					sprite = Sprite.player0a;
-				} else {
-					sprite = Sprite.player0b;
-				}
-			}
-		}
-		if (dir == 1 || dir == 3) {
-			sprite = Sprite.player1;
-			if (walking) {
-				if (anim % 20 > 10) {
-					sprite = Sprite.player1a;
-				} else {
-					sprite = Sprite.player1b;
-				}
-			}
-		}
-		if (dir == 2) {
-			sprite = Sprite.player2;
-			if (walking) {
-				if (anim % 20 > 10) {
-					sprite = Sprite.player2a;
-				} else {
-					sprite = Sprite.player2b;
-				}
-			}
-		}
-		if (dir == 3) {
-			flip = 1;
-		}
-		sprite = test.getSprite();
-		screen.renderPlayer(x - sprite.SIZE / 2, y - sprite.SIZE / 2, sprite,
-				flip);
+		sprite = animSprite.getSprite();
+		screen.renderPlayer(x - sprite.getW() / 2, y - sprite.getH() / 2, sprite,
+				0);
 	}
 }

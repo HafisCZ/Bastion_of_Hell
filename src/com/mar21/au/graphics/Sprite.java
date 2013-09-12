@@ -32,7 +32,7 @@ public class Sprite {
 	public static Sprite pFire = new Sprite(16, 2, 1, SpriteSheet.attack);
 	public static Sprite p7 = new Sprite(16, 0, 2, SpriteSheet.attack);
 
-	public static Sprite particle = new Sprite(2, 0x101010);
+	public static Sprite particle = new Sprite(2, 0x100000);
 
 	protected Sprite(SpriteSheet sheet) {
 		SIZE = -1;

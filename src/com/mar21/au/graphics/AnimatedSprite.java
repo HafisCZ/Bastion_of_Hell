@@ -30,4 +30,12 @@ public class AnimatedSprite extends Sprite {
 		rate = frames;
 	}
 
+	public void setFrame(int i) {
+		if (i > sheet.getSprites().length - 1) {
+			System.err.println("Out of bounds");
+			return;
+		}
+		sprite = sheet.getSprites()[i];
+	}
+
 }
