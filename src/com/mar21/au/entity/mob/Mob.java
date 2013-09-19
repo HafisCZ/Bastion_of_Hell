@@ -4,6 +4,7 @@ import com.mar21.au.entity.Entity;
 import com.mar21.au.entity.particle.Particle;
 import com.mar21.au.entity.projectile.HoleProjectile;
 import com.mar21.au.entity.projectile.Projectile;
+import com.mar21.au.graphics.Screen;
 import com.mar21.au.graphics.Sprite;
 
 public abstract class Mob extends Entity {
@@ -34,8 +35,7 @@ public abstract class Mob extends Entity {
 		}
 	}
 
-	public void update() {
-	}
+	public abstract void update();
 
 	protected void shoot(int x, int y, double dir) {
 		Projectile p = new HoleProjectile(x, y, dir);
@@ -53,8 +53,5 @@ public abstract class Mob extends Entity {
 		return solid;
 	}
 
-	public void render() {
-
-	}
-
+	public abstract void render(Screen screen);
 }

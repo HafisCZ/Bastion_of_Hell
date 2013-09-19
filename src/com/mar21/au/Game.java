@@ -29,7 +29,7 @@ public class Game extends Canvas implements Runnable {
 	public static int scale = 3;
 
 	public static final String NAME = "";
-	public static final String VERSION = "1B002";
+	public static final String VERSION = "1B010";
 
 	private Thread thread;
 	private JFrame frame;
