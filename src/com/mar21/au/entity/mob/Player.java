@@ -15,7 +15,6 @@ public class Player extends Mob {
 	private Keyboard input;
 	private Sprite sprite;
 	private int anim = 0;
-	private boolean walking = false;
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 3);
 	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 3);
@@ -41,10 +40,10 @@ public class Player extends Mob {
 	}
 
 	public void update() {
-		if (walking && tick >= 10){
+		if (moving && tick >= 10){
 			animSprite.update();
 			tick = 0;
-		} else if (!walking) {
+		} else if (!moving) {
 			animSprite.setFrame(0);
 		}
 		
@@ -74,9 +73,9 @@ public class Player extends Mob {
 		
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);
-			walking = true;
+			moving = true;
 		} else {
-			walking = false;
+			moving = false;
 		}
 
 		clear();
