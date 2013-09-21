@@ -1,15 +1,12 @@
 package com.mar21.au.entity.mob;
 
 import com.mar21.au.entity.Entity;
-import com.mar21.au.entity.particle.Particle;
 import com.mar21.au.entity.projectile.HoleProjectile;
 import com.mar21.au.entity.projectile.Projectile;
 import com.mar21.au.graphics.Screen;
-import com.mar21.au.graphics.Sprite;
 
 public abstract class Mob extends Entity {
 
-	protected Sprite sprite;
 	protected int dir = 0;
 	protected boolean moving = false;
 
@@ -45,8 +42,8 @@ public abstract class Mob extends Entity {
 	private boolean collision(int xa, int ya) {
 		boolean solid = false;
 		for (int c = 0; c < 4; c++) {
-			int xt = ((x + xa) + c % 2 * 14 - 8) / 16;
-			int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
+			int xt = ((x + xa) + c % 2 * 13 - 7) / 16;
+			int yt = ((y + ya) + c / 2 * 15 + 0) / 16;
 			if (level.getTile(xt, yt).solid())
 				solid = true;
 		}

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.mar21.au.entity.mob.Chaser;
 import com.mar21.au.entity.mob.Dummy;
 
 public class SpawnLevel extends Level {
@@ -26,7 +27,7 @@ public class SpawnLevel extends Level {
 			System.out.println("Could not load level file!");
 		}
 		for (int i = 0; i < 5; i++){
-			add(new Dummy(13,13));
+			add(new Chaser(13,13));
 		}
 	}
 
