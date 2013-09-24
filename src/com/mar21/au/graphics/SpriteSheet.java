@@ -20,6 +20,9 @@ public class SpriteSheet {
 
 	public static SpriteSheet player = new SpriteSheet(
 			"/textures/sheets/player.png", 128, 96);
+	
+	public static SpriteSheet wanderer = new SpriteSheet(
+			"/textures/sheets/zombie.png", 128, 96);
 
 	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 1, 3,
 			32);
@@ -28,6 +31,15 @@ public class SpriteSheet {
 	public static SpriteSheet player_left = new SpriteSheet(player, 2, 0, 1, 3,
 			32);
 	public static SpriteSheet player_right = new SpriteSheet(player, 3, 0, 1, 3,
+			32);
+	
+	public static SpriteSheet wanderer_down = new SpriteSheet(wanderer, 0, 0, 1, 3,
+			32);
+	public static SpriteSheet wanderer_up = new SpriteSheet(wanderer, 1, 0, 1, 3,
+			32);
+	public static SpriteSheet wanderer_left = new SpriteSheet(wanderer, 2, 0, 1, 3,
+			32);
+	public static SpriteSheet wanderer_right = new SpriteSheet(wanderer, 3, 0, 1, 3,
 			32);
 	
 	private Sprite[] sprites;

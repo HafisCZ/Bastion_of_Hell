@@ -8,18 +8,22 @@ import com.mar21.au.level.Level;
 
 public class Entity{
 
-	public int x, y;
+	protected int x, y;
 	protected Sprite sprite;
 	private boolean removed = false;
 	protected Level level;
 	protected final Random random = new Random();
-
+	protected boolean moving = false;
 	
 	public Sprite getSprite() {
 		return sprite;
 	}
 	
 	public Entity(){
+	}
+	
+	public boolean isMoving(){
+		return moving;
 	}
 	
 	public Entity(int x, int y, Sprite sprite) {
@@ -46,6 +50,14 @@ public class Entity{
 	
 	public void init(Level level) {
 		this.level = level;
+	}
+	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
 	}
 
 }

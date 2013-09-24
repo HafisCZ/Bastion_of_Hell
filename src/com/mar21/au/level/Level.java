@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mar21.au.entity.Entity;
+import com.mar21.au.entity.mob.Player;
 import com.mar21.au.entity.particle.Particle;
 import com.mar21.au.entity.projectile.Projectile;
 import com.mar21.au.graphics.Screen;
@@ -18,6 +19,8 @@ public class Level {
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
+
+	private List<Player> players = new ArrayList<Player>();
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -36,6 +39,18 @@ public class Level {
 		return projectiles;
 	}
 
+	public List<Player> getPlayer() {
+		return players;
+	}
+
+	public Player getPlayerAt(int i) {
+		return players.get(i);
+	}
+
+	public Player getClientPlayer() {
+		return players.get(0);
+	}
+
 	protected void generateLevel() {
 	}
 
@@ -47,7 +62,16 @@ public class Level {
 		return projectiles.size();
 	}
 
+	public long getRCount() {
+		return particles.size();
+	}
+
+	public long getECount() {
+		return entities.size();
+	}
+
 	public void update() {
+		remove();
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update();
 		}
@@ -57,7 +81,9 @@ public class Level {
 		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).update();
 		}
-		remove();
+		for (int i = 0; i < players.size(); i++) {
+			players.get(i).update();
+		}
 	}
 
 	private void remove() {
@@ -73,6 +99,10 @@ public class Level {
 			if (particles.get(i).isRemoved())
 				particles.remove(i);
 		}
+		for (int i = 0; i < players.size(); i++) {
+			if (players.get(i).isRemoved())
+				players.remove(i);
+		}
 	}
 
 	public void add(Entity e) {
@@ -81,6 +111,8 @@ public class Level {
 			particles.add((Particle) e);
 		} else if (e instanceof Projectile) {
 			projectiles.add((Projectile) e);
+		} else if (e instanceof Player) {
+			players.add((Player) e);
 		} else {
 			entities.add(e);
 		}
@@ -140,6 +172,9 @@ public class Level {
 		}
 		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).render(screen);
+		}
+		for (int i = 0; i < players.size(); i++) {
+			players.get(i).render(screen);
 		}
 	}
 

@@ -1,11 +1,14 @@
 package com.mar21.au.graphics;
 
+import com.mar21.au.entity.Entity;
+
 public class AnimatedSprite extends Sprite {
 
 	private int frame = 0;
 	private Sprite sprite;
 	private int rate = 5;
 	private int length = -1;
+	private long tick = 0;
 
 	public AnimatedSprite(SpriteSheet sheet, int lenght) {
 		super(sheet);
@@ -14,12 +17,20 @@ public class AnimatedSprite extends Sprite {
 		
 	}
 
-	public void update() {
-		if (frame >= length - 1)
-			frame = 0;
-		else
-			frame++;
-		sprite = sheet.getSprites()[frame];
+	public void update(Entity e) {
+		if (e.isMoving()){
+			tick++;
+			if (tick > 20){
+				if (frame >= length - 1)
+					frame = 0;
+				else
+					frame++;
+				sprite = sheet.getSprites()[frame];
+				tick = 0;
+			}
+		}else {
+			sprite = sheet.getSprites()[0];
+		}
 	}
 
 	public Sprite getSprite() {

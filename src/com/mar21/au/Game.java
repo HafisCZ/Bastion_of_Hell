@@ -63,7 +63,7 @@ public class Game extends Canvas implements Runnable {
 		level = new SpawnLevel("/textures/levels/level.png");
 		TileCoord pS = new TileCoord(15, 15);
 		player = new Player(pS.x(), pS.y(), key);
-		player.init(level);
+		level.add(player);
 
 		addKeyListener(key);
 		Mouse mouse = new Mouse();
@@ -120,7 +120,6 @@ public class Game extends Canvas implements Runnable {
 
 	public void update() {
 		key.update();
-		player.update();
 		level.update();
 	}
 
@@ -132,10 +131,9 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		screen.clear();
-		int xScroll = player.x - screen.width / 2;
-		int yScroll = player.y - screen.height / 2;
+		int xScroll = player.getX() - screen.width / 2;
+		int yScroll = player.getY() - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
-		player.render(screen);
 		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
@@ -146,10 +144,10 @@ public class Game extends Canvas implements Runnable {
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Verdana", 0, 14));
-			g.drawString("X: " + player.x + " Y: " + player.y, 10, 20);
+			g.drawString("X: " + player.getX() + " Y: " + player.getY(), 10, 20);
 			g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " B: "
 					+ Mouse.getButton(), 10, 40);
-			g.drawString("C: " + level.getPCount(), 10, 60);
+			g.drawString("C: " + level.getPCount() + " | " + level.getRCount() + " | " + level.getECount(), 10, 60);
 		}
 		g.dispose();
 		bs.show();

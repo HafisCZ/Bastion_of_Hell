@@ -8,7 +8,6 @@ import com.mar21.au.graphics.Screen;
 public abstract class Mob extends Entity {
 
 	protected int dir = 0;
-	protected boolean moving = false;
 
 	public void move(int xa, int ya) {
 		if (xa != 0 && ya != 0) {

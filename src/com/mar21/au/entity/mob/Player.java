@@ -21,8 +21,6 @@ public class Player extends Mob {
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 3);
 	private AnimatedSprite animSprite = down;
 	
-	int tick;
-	
 	private int rate = 0;
 
 	public Player(Keyboard input) {
@@ -40,14 +38,7 @@ public class Player extends Mob {
 	}
 
 	public void update() {
-		if (moving && tick >= 10){
-			animSprite.update();
-			tick = 0;
-		} else if (!moving) {
-			animSprite.setFrame(0);
-		}
-		
-		tick++;
+		animSprite.update(this);
 		
 		if (rate > 0)
 			rate--;
