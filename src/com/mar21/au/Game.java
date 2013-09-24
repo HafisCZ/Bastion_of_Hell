@@ -13,8 +13,6 @@ import javax.swing.JFrame;
 
 import com.mar21.au.entity.mob.Player;
 import com.mar21.au.graphics.Screen;
-import com.mar21.au.graphics.Sprite;
-import com.mar21.au.graphics.SpriteSheet;
 import com.mar21.au.input.Keyboard;
 import com.mar21.au.input.Mouse;
 import com.mar21.au.level.Level;
@@ -40,10 +38,8 @@ public class Game extends Canvas implements Runnable {
 
 	private Screen screen;
 
-	private BufferedImage image = new BufferedImage(width, height,
-			BufferedImage.TYPE_INT_RGB);
-	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer())
-			.getData();
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
 	public static int getWWidth() {
 		return width * scale;
@@ -134,7 +130,7 @@ public class Game extends Canvas implements Runnable {
 		int xScroll = player.getX() - screen.width / 2;
 		int yScroll = player.getY() - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
-		
+
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}
@@ -145,8 +141,7 @@ public class Game extends Canvas implements Runnable {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Verdana", 0, 14));
 			g.drawString("X: " + player.getX() + " Y: " + player.getY(), 10, 20);
-			g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " B: "
-					+ Mouse.getButton(), 10, 40);
+			g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " B: " + Mouse.getButton(), 10, 40);
 			g.drawString("C: " + level.getPCount() + " | " + level.getRCount() + " | " + level.getECount(), 10, 60);
 		}
 		g.dispose();

@@ -29,12 +29,10 @@ public class Particle extends Entity {
 
 	public void update() {
 		time++;
-		if (time >= 7400)
-			time = 0;
-		if (time > life)
-			remove();
+		if (time >= 7400) time = 0;
+		if (time > life) remove();
 		za -= 0.1;
-		
+
 		if (zz < 0) {
 			zz = 0;
 			za *= -0.55;
@@ -68,8 +66,7 @@ public class Particle extends Entity {
 			int iy = (int) Math.ceil(yt);
 			if (c % 2 == 0) ix = (int) Math.floor(xt);
 			if (c / 2 == 0) iy = (int) Math.floor(yt);
-			if (level.getTile(ix, iy).solid())
-				solid = true;
+			if (level.getTile(ix, iy).solid()) solid = true;
 		}
 		return solid;
 	}

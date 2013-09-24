@@ -1,7 +1,6 @@
 package com.mar21.au.entity.spawner;
 
 import com.mar21.au.entity.Entity;
-import com.mar21.au.entity.particle.Particle;
 import com.mar21.au.level.Level;
 
 public class Spawner extends Entity {

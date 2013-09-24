@@ -14,21 +14,19 @@ public class AnimatedSprite extends Sprite {
 		super(sheet);
 		sprite = sheet.getSprites()[0];
 		this.length = lenght;
-		
+
 	}
 
 	public void update(Entity e) {
-		if (e.isMoving()){
+		if (e.isMoving()) {
 			tick++;
-			if (tick > 20){
-				if (frame >= length - 1)
-					frame = 0;
-				else
-					frame++;
+			if (tick > 20) {
+				if (frame >= length - 1) frame = 0;
+				else frame++;
 				sprite = sheet.getSprites()[frame];
 				tick = 0;
 			}
-		}else {
+		} else {
 			sprite = sheet.getSprites()[0];
 		}
 	}

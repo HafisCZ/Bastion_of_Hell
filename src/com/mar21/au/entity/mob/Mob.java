@@ -8,6 +8,7 @@ import com.mar21.au.graphics.Screen;
 public abstract class Mob extends Entity {
 
 	protected int dir = 0;
+	protected int rate = 0;
 
 	public void move(int xa, int ya) {
 		if (xa != 0 && ya != 0) {
@@ -16,14 +17,10 @@ public abstract class Mob extends Entity {
 			return;
 		}
 
-		if (xa > 0)
-			dir = 1;
-		if (xa < 0)
-			dir = 3;
-		if (ya > 0)
-			dir = 2;
-		if (ya < 0)
-			dir = 0;
+		if (xa > 0) dir = 1;
+		if (xa < 0) dir = 3;
+		if (ya > 0) dir = 2;
+		if (ya < 0) dir = 0;
 
 		if (!collision(xa, ya)) {
 			x += xa;
@@ -33,9 +30,23 @@ public abstract class Mob extends Entity {
 
 	public abstract void update();
 
-	protected void shoot(int x, int y, double dir) {
-		Projectile p = new HoleProjectile(x, y, dir);
-		level.add(p);
+	protected void updatesh(int skip) {
+		if (rate > 0) rate -= skip;
+	}
+	
+	protected void resetsh(int rate) {
+		this.rate = rate;
+	}
+
+	protected void shoot(int x, int y, double dir, int index) {
+		if (index == 0) {
+			Projectile p = new HoleProjectile(x, y, dir);
+			level.add(p);
+		} else if (index == 1) {
+			Projectile p = new HoleProjectile(x, y, dir);
+			level.add(p);
+		}
+
 	}
 
 	private boolean collision(int xa, int ya) {
@@ -43,8 +54,7 @@ public abstract class Mob extends Entity {
 		for (int c = 0; c < 4; c++) {
 			int xt = ((x + xa) + c % 2 * 13 - 7) / 16;
 			int yt = ((y + ya) + c / 2 * 15 + 0) / 16;
-			if (level.getTile(xt, yt).solid())
-				solid = true;
+			if (level.getTile(xt, yt).solid()) solid = true;
 		}
 		return solid;
 	}

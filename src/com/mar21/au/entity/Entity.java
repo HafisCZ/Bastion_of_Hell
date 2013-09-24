@@ -6,7 +6,7 @@ import com.mar21.au.graphics.Screen;
 import com.mar21.au.graphics.Sprite;
 import com.mar21.au.level.Level;
 
-public class Entity{
+public class Entity {
 
 	protected int x, y;
 	protected Sprite sprite;
@@ -14,24 +14,24 @@ public class Entity{
 	protected Level level;
 	protected final Random random = new Random();
 	protected boolean moving = false;
-	
+
 	public Sprite getSprite() {
 		return sprite;
 	}
-	
-	public Entity(){
+
+	public Entity() {
 	}
-	
-	public boolean isMoving(){
+
+	public boolean isMoving() {
 		return moving;
 	}
-	
+
 	public Entity(int x, int y, Sprite sprite) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
 	}
-	
+
 	public void update() {
 
 	}
@@ -43,20 +43,20 @@ public class Entity{
 	public void remove() {
 		removed = true;
 	}
-	
+
 	public boolean isRemoved() {
 		return removed;
 	}
-	
+
 	public void init(Level level) {
 		this.level = level;
 	}
-	
-	public int getX(){
+
+	public int getX() {
 		return x;
 	}
-	
-	public int getY(){
+
+	public int getY() {
 		return y;
 	}
 

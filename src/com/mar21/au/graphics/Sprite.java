@@ -92,8 +92,7 @@ public class Sprite {
 	private void load() {
 		for (int y = 0; y < h; y++) {
 			for (int x = 0; x < w; x++) {
-				pixels[x + y * w] = sheet.pixels[(x + this.x) + (y + this.y)
-						* sheet.WIDTH];
+				pixels[x + y * w] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.WIDTH];
 			}
 		}
 	}

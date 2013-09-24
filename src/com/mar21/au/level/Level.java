@@ -71,7 +71,6 @@ public class Level {
 	}
 
 	public void update() {
-		remove();
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update();
 		}
@@ -84,24 +83,21 @@ public class Level {
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).update();
 		}
+		remove();
 	}
 
 	private void remove() {
 		for (int i = 0; i < entities.size(); i++) {
-			if (entities.get(i).isRemoved())
-				entities.remove(i);
+			if (entities.get(i).isRemoved()) entities.remove(i);
 		}
 		for (int i = 0; i < projectiles.size(); i++) {
-			if (projectiles.get(i).isRemoved())
-				projectiles.remove(i);
+			if (projectiles.get(i).isRemoved()) projectiles.remove(i);
 		}
 		for (int i = 0; i < particles.size(); i++) {
-			if (particles.get(i).isRemoved())
-				particles.remove(i);
+			if (particles.get(i).isRemoved()) particles.remove(i);
 		}
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).isRemoved())
-				players.remove(i);
+			if (players.get(i).isRemoved()) players.remove(i);
 		}
 	}
 
@@ -132,29 +128,21 @@ public class Level {
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
 				if (getTile(x, y).layer()) {
-					if (getTile(x - 1, y) != Tile.voidTile
-							&& getTile(x - 1, y) != getTile(x, y)) {
+					if (getTile(x - 1, y) != Tile.voidTile && getTile(x - 1, y) != getTile(x, y)) {
 						getTile(x - 1, y).render(x, y, screen);
-					} else if (getTile(x + 1, y) != Tile.voidTile
-							&& getTile(x + 1, y) != getTile(x, y)) {
+					} else if (getTile(x + 1, y) != Tile.voidTile && getTile(x + 1, y) != getTile(x, y)) {
 						getTile(x + 1, y).render(x, y, screen);
-					} else if (getTile(x, y - 1) != Tile.voidTile
-							&& getTile(x, y - 1) != getTile(x, y)) {
+					} else if (getTile(x, y - 1) != Tile.voidTile && getTile(x, y - 1) != getTile(x, y)) {
 						getTile(x, y - 1).render(x, y, screen);
-					} else if (getTile(x, y + 1) != Tile.voidTile
-							&& getTile(x, y + 1) != getTile(x, y)) {
+					} else if (getTile(x, y + 1) != Tile.voidTile && getTile(x, y + 1) != getTile(x, y)) {
 						getTile(x, y + 1).render(x, y, screen);
-					} else if (getTile(x + 2, y) != Tile.voidTile
-							&& getTile(x + 2, y) != getTile(x, y)) {
+					} else if (getTile(x + 2, y) != Tile.voidTile && getTile(x + 2, y) != getTile(x, y)) {
 						getTile(x + 2, y).render(x, y, screen);
-					} else if (getTile(x - 2, y) != Tile.voidTile
-							&& getTile(x - 2, y) != getTile(x, y)) {
+					} else if (getTile(x - 2, y) != Tile.voidTile && getTile(x - 2, y) != getTile(x, y)) {
 						getTile(x - 2, y).render(x, y, screen);
-					} else if (getTile(x, y - 2) != Tile.voidTile
-							&& getTile(x, y - 2) != getTile(x, y)) {
+					} else if (getTile(x, y - 2) != Tile.voidTile && getTile(x, y - 2) != getTile(x, y)) {
 						getTile(x, y - 2).render(x, y, screen);
-					} else if (getTile(x, y + 2) != Tile.voidTile
-							&& getTile(x, y + 2) != getTile(x, y)) {
+					} else if (getTile(x, y + 2) != Tile.voidTile && getTile(x, y + 2) != getTile(x, y)) {
 						getTile(x, y + 2).render(x, y, screen);
 					} else {
 						Tile.voidTile.render(x, y, screen);
@@ -179,38 +167,22 @@ public class Level {
 	}
 
 	public Tile getTile(int x, int y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) {
-			return Tile.voidTile;
-		}
-		if (tiles[x + y * width] == 0xFFFF0000) {
-			return Tile.grass;
-		}
-		if (tiles[x + y * width] == 0xFFFFFF00) {
-			return Tile.grass1;
-		}
-		if (tiles[x + y * width] == 0xFF00FFFF) {
-			return Tile.grass2;
-		}
-		if (tiles[x + y * width] == 0xFF000000) {
-			return Tile.rock;
-		}
-		if (tiles[x + y * width] == 0xFFFF6A00) {
-			return Tile.planks;
-		}
-		if (tiles[x + y * width] == 0xFFFFD800) {
-			return Tile.doors;
-		}
+		if (x < 0 || y < 0 || x >= width || y >= height) { return Tile.voidTile; }
+		if (tiles[x + y * width] == 0xFFFF0000) { return Tile.grass; }
+		if (tiles[x + y * width] == 0xFFFFFF00) { return Tile.grass1; }
+		if (tiles[x + y * width] == 0xFF00FFFF) { return Tile.grass2; }
+		if (tiles[x + y * width] == 0xFF000000) { return Tile.rock; }
+		if (tiles[x + y * width] == 0xFFFF6A00) { return Tile.planks; }
+		if (tiles[x + y * width] == 0xFFFFD800) { return Tile.doors; }
 		return Tile.voidTile;
 	}
 
-	public boolean tileCollision(double x, double y, double xa, double ya,
-			int size) {
+	public boolean tileCollision(double x, double y, double xa, double ya, int size) {
 		boolean solid = false;
 		for (int c = 0; c < 4; c++) {
 			int xt = (((int) x + (int) xa) + c % 2 * size / 10) / 16;
 			int yt = (((int) y + (int) ya) + c / 2 * size / 6 + 2) / 16;
-			if (getTile(xt, yt).solid())
-				solid = true;
+			if (getTile(xt, yt).solid()) solid = true;
 		}
 		return solid;
 	}
@@ -220,8 +192,7 @@ public class Level {
 		for (int c = 0; c < 4; c++) {
 			int xt = (x - c % 2 * size + xo) >> 4;
 			int yt = (y - c / 2 * size + yo) >> 4;
-			if (getTile(xt, yt).solid())
-				solid = true;
+			if (getTile(xt, yt).solid()) solid = true;
 		}
 		return solid;
 	}

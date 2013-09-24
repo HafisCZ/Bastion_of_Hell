@@ -28,16 +28,14 @@ public class HoleProjectile extends Projectile {
 	}
 
 	protected void move() {
-			x += nx;
-			y += ny;
-		if (distance() > range)
-			remove();
+		x += nx;
+		y += ny;
+		if (distance() > range) remove();
 	}
 
 	private double distance() {
 		double dist = 0;
-		dist = Math.sqrt(Math.abs((xOrigin - x) * (xOrigin - x) + (yOrigin - y)
-				* (yOrigin - y)));
+		dist = Math.sqrt(Math.abs((xOrigin - x) * (xOrigin - x) + (yOrigin - y) * (yOrigin - y)));
 		return dist;
 	}
 

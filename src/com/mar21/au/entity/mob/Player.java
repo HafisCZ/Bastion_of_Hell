@@ -20,13 +20,11 @@ public class Player extends Mob {
 	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 3);
 	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 3);
 	private AnimatedSprite animSprite = down;
-	
-	private int rate = 0;
 
 	public Player(Keyboard input) {
 		this.input = input;
 		sprite = Sprite.player0;
-		rate = HoleProjectile.RATE;
+		resetsh(HoleProjectile.RATE);
 	}
 
 	public Player(int x, int y, Keyboard input) {
@@ -34,34 +32,32 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		sprite = Sprite.player0;
-		rate = HoleProjectile.RATE;
+		resetsh(HoleProjectile.RATE);
 	}
 
 	public void update() {
 		animSprite.update(this);
 		
-		if (rate > 0)
-			rate--;
 		int xa = 0, ya = 0;
-		if (anim < 7500)
-			anim++;
-		else
-			anim = 0;
-		if (input.up){
+		if (anim < 7500) anim++;
+		else anim = 0;
+		
+		if (input.up) {
 			ya--;
 			animSprite = up;
-		} else if (input.down){
+		} else if (input.down) {
 			ya++;
 			animSprite = down;
 		}
-		if (input.left){
+		
+		if (input.left) {
 			xa--;
 			animSprite = left;
-		} else if (input.right){
+		} else if (input.right) {
 			xa++;
 			animSprite = right;
 		}
-		
+
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);
 			moving = true;
@@ -74,20 +70,20 @@ public class Player extends Mob {
 	}
 
 	private void updateShooting() {
+		updatesh(1);
 		if (Mouse.getButton() == 1 && rate <= 0) {
 			double dx = Mouse.getX() - Game.getWWidth() / 2;
 			double dy = Mouse.getY() - Game.getWHeight() / 2;
 			double d = Math.atan2(dy, dx);
-			shoot(x, y, d);
-			rate = HoleProjectile.RATE;
+			shoot(x, y, d, 1);
+			resetsh(HoleProjectile.RATE);
 		}
 	}
 
 	private void clear() {
 		for (int i = 0; i < level.getProjectiles().size(); i++) {
 			Projectile p = level.getProjectiles().get(i);
-			if (p.isRemoved())
-				level.getProjectiles().remove(i);
+			if (p.isRemoved()) level.getProjectiles().remove(i);
 		}
 	}
 
