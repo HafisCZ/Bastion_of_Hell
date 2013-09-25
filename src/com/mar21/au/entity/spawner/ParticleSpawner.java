@@ -13,6 +13,7 @@ public class ParticleSpawner extends Spawner {
 		for (int i = 0; i < a; i++) {
 			level.add(new Particle(x, y, life));
 		}
+		remove();
 	}
 
 }

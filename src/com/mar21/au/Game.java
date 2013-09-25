@@ -142,7 +142,7 @@ public class Game extends Canvas implements Runnable {
 			g.setFont(new Font("Verdana", 0, 14));
 			g.drawString("X: " + player.getX() + " Y: " + player.getY(), 10, 20);
 			g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " B: " + Mouse.getButton(), 10, 40);
-			g.drawString("C: " + level.getPCount() + " | " + level.getRCount() + " | " + level.getECount(), 10, 60);
+			g.drawString("C: " + level.getPCount() + " | " + level.getRCount() + " | " + level.getECount() + " | " + level.getFCount(), 10, 60);
 		}
 		g.dispose();
 		bs.show();

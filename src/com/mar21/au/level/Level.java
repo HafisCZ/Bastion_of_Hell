@@ -70,6 +70,10 @@ public class Level {
 		return entities.size();
 	}
 
+	public long getFCount() {
+		return players.size();
+	}
+
 	public void update() {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update();
@@ -112,10 +116,6 @@ public class Level {
 		} else {
 			entities.add(e);
 		}
-	}
-
-	private void time() {
-
 	}
 
 	public void render(int xscroll, int yscroll, Screen screen) {
@@ -195,6 +195,42 @@ public class Level {
 			if (getTile(xt, yt).solid()) solid = true;
 		}
 		return solid;
+	}
+
+	public List<Entity> getEntities(Entity e, int radius) {
+		List<Entity> result = new ArrayList<Entity>();
+		int a = e.getX();
+		int b = e.getY();
+		for (int i = 0; i < entities.size(); i++) {
+			Entity f = entities.get(i);
+			int x = f.getX();
+			int y = f.getY();
+			int dx = Math.abs(x - a);
+			int dy = Math.abs(y - b);
+			double dist = Math.sqrt((dx * dx) + (dy * dy));
+			if (dist <= radius) {
+				result.add(f);
+			}
+		}
+		return result;
+	}
+
+	public List<Player> getPlayers(Entity e, int radius) {
+		List<Player> result = new ArrayList<Player>();
+		int a = e.getX();
+		int b = e.getY();
+		for (int i = 0; i < players.size(); i++) {
+			Player f = players.get(i);
+			int x = f.getX();
+			int y = f.getY();
+			int dx = Math.abs(x - a);
+			int dy = Math.abs(y - b);
+			double dist = Math.sqrt((dx * dx) + (dy * dy));
+			if (dist <= radius) {
+				result.add(f);
+			}
+		}
+		return result;
 	}
 
 }
