@@ -19,6 +19,7 @@ public class Chaser extends Mob {
 	public Chaser(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
+		this.walkspeed = 1;
 		sprite = Sprite.player0;
 	}
 
@@ -29,10 +30,10 @@ public class Chaser extends Mob {
 		List<Player> p = level.getPlayers(this, 50);
 		if (p.size() > 0) {
 			Player player = p.get(0);
-			if (x < player.getX() - 16) xa++;
-			if (x > player.getX() + 16) xa--;
-			if (y < player.getY() - 16) ya++;
-			if (y > player.getY() + 16) ya--;
+			if (x < player.getX() - 16) xa+=walkspeed;
+			if (x > player.getX() + 16) xa-=walkspeed;
+			if (y < player.getY() - 16) ya+=walkspeed;
+			if (y > player.getY() + 16) ya-=walkspeed;
 		}
 		
 		if (xa != 0 || ya != 0) {

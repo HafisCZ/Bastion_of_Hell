@@ -23,6 +23,7 @@ public class Player extends Mob {
 
 	public Player(Keyboard input) {
 		this.input = input;
+		this.walkspeed = 2;
 		sprite = Sprite.player0;
 		resetsh(HoleProjectile.RATE);
 	}
@@ -31,30 +32,31 @@ public class Player extends Mob {
 		this.x = x;
 		this.y = y;
 		this.input = input;
+		this.walkspeed = 2;
 		sprite = Sprite.player0;
 		resetsh(HoleProjectile.RATE);
 	}
 
 	public void update() {
 		animSprite.update(this);
-		
+
 		int xa = 0, ya = 0;
 		if (anim < 7500) anim++;
 		else anim = 0;
-		
+
 		if (input.up) {
-			ya--;
+			ya -= walkspeed;
 			animSprite = up;
 		} else if (input.down) {
-			ya++;
+			ya += walkspeed;
 			animSprite = down;
 		}
-		
+
 		if (input.left) {
-			xa--;
+			xa -= walkspeed;
 			animSprite = left;
 		} else if (input.right) {
-			xa++;
+			xa += walkspeed;
 			animSprite = right;
 		}
 
