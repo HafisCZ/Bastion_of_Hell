@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import com.mar21.au.entity.mob.Player;
 import com.mar21.au.graphics.Screen;
+import com.mar21.au.graphics.Utils;
 import com.mar21.au.input.Keyboard;
 import com.mar21.au.input.Mouse;
 import com.mar21.au.level.Level;
@@ -26,7 +27,7 @@ public class Game extends Canvas implements Runnable {
 	private static int height = width / 16 * 9;
 	public static int scale = 3;
 
-	public static final String NAME = "";
+	public static final String NAME = "Bastion of Hell";
 	public static final String VERSION = "[CC-BY-NC-ND] HafisCZ 2013/2014";
 
 	private Thread thread;
