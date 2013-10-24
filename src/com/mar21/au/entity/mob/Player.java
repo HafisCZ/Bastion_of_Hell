@@ -12,6 +12,7 @@ import com.mar21.au.input.Mouse;
 
 public class Player extends Mob {
 
+	private double classSpeed = 1;
 	private Keyboard input;
 	private Sprite sprite;
 	private int anim = 0;
@@ -23,7 +24,7 @@ public class Player extends Mob {
 
 	public Player(Keyboard input) {
 		this.input = input;
-		this.walkspeed = 2;
+		this.walkspeed = classSpeed;
 		sprite = Sprite.player0;
 		resetsh(HoleProjectile.RATE);
 	}
@@ -32,7 +33,7 @@ public class Player extends Mob {
 		this.x = x;
 		this.y = y;
 		this.input = input;
-		this.walkspeed = 2;
+		this.walkspeed = classSpeed;
 		sprite = Sprite.player0;
 		resetsh(HoleProjectile.RATE);
 	}
@@ -40,7 +41,7 @@ public class Player extends Mob {
 	public void update() {
 		animSprite.update(this);
 
-		int xa = 0, ya = 0;
+		double xa = 0, ya = 0;
 		if (anim < 7500) anim++;
 		else anim = 0;
 
@@ -91,6 +92,6 @@ public class Player extends Mob {
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		screen.renderPlayer(x, y, sprite);
+		screen.renderPlayer((int) x, (int) y, sprite);
 	}
 }

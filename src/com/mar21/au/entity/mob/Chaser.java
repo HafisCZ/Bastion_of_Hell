@@ -30,12 +30,12 @@ public class Chaser extends Mob {
 		List<Player> p = level.getPlayers(this, 50);
 		if (p.size() > 0) {
 			Player player = p.get(0);
-			if (x < player.getX() - 16) xa+=walkspeed;
-			if (x > player.getX() + 16) xa-=walkspeed;
-			if (y < player.getY() - 16) ya+=walkspeed;
-			if (y > player.getY() + 16) ya-=walkspeed;
+			if (x < player.getX() - 16) xa += walkspeed;
+			if (x > player.getX() + 16) xa -= walkspeed;
+			if (y < player.getY() - 16) ya += walkspeed;
+			if (y > player.getY() + 16) ya -= walkspeed;
 		}
-		
+
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);
 			moving = true;
@@ -62,7 +62,7 @@ public class Chaser extends Mob {
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		screen.renderMob(x - sprite.getW() / 2, y - sprite.getH() / 2, sprite);
+		screen.renderMob((int) x - sprite.getW() / 2, (int) y - sprite.getH() / 2, sprite);
 	}
 
 }

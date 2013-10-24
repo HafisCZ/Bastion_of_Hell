@@ -8,7 +8,7 @@ public class HoleProjectile extends Projectile {
 
 	public static final int RATE = 10;
 
-	public HoleProjectile(int x, int y, double dir) {
+	public HoleProjectile(double x, double y, double dir) {
 		super(x, y, dir);
 		range = random.nextInt(100) + 150;
 		dmg = 20;
