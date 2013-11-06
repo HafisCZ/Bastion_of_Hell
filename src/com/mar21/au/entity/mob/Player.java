@@ -74,7 +74,7 @@ public class Player extends Mob {
 
 	private void updateShooting() {
 		updatesh(1);
-		if (Mouse.getButton() == 1 && rate <= 0) {
+		if (Mouse.getButton() == 1 && rate <= 0) { Game.err = true;
 			double dx = Mouse.getX() - Game.getWWidth() / 2;
 			double dy = Mouse.getY() - Game.getWHeight() / 2;
 			double d = Math.atan2(dy, dx);

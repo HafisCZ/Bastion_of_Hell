@@ -38,6 +38,14 @@ public class Screen {
 		}
 	}
 
+	public void fillScreen(int col) {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				pixels[x + y * width] = col;
+			}
+		}
+	}
+
 	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed) {
 		if (fixed) {
 			xp -= xOffset;

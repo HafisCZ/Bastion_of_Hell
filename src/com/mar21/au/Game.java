@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import com.mar21.au.entity.mob.Player;
 import com.mar21.au.graphics.Screen;
+import com.mar21.au.graphics.ThrowCrash;
 import com.mar21.au.graphics.Utils;
 import com.mar21.au.input.Keyboard;
 import com.mar21.au.input.Mouse;
@@ -26,6 +27,9 @@ public class Game extends Canvas implements Runnable {
 	private static int width = 300;
 	private static int height = width / 16 * 9;
 	public static int scale = 3;
+	
+	public static boolean err = false;
+	public static String errMessage = "player class";
 
 	public static final String NAME = "Bastion of Hell";
 	public static final String VERSION = "[CC-BY-NC-ND] HafisCZ 2013/2014";
@@ -98,11 +102,13 @@ public class Game extends Canvas implements Runnable {
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
+			
 			while (delta >= 1) {
 				update();
 				updates++;
 				delta--;
 			}
+			
 			render();
 			frames++;
 
@@ -117,7 +123,10 @@ public class Game extends Canvas implements Runnable {
 
 	public void update() {
 		key.update();
-		level.update();
+		
+		if (!err) {
+			level.update();
+		}
 	}
 
 	public void render() {
@@ -128,10 +137,17 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		screen.clear();
+		
+		if (err) {
+			new ThrowCrash(1, screen);
+		} else {
+		
 		double xScroll = player.getX() - screen.width / 2;
 		double yScroll = player.getY() - screen.height / 2;
 		level.render((int) xScroll, (int) yScroll, screen);
 
+		}
+		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}
@@ -144,6 +160,11 @@ public class Game extends Canvas implements Runnable {
 			g.drawString("X: " + player.getX() + " Y: " + player.getY(), 10, 20);
 			g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " B: " + Mouse.getButton(), 10, 40);
 			g.drawString("C: " + level.getPCount() + " | " + level.getRCount() + " | " + level.getECount() + " | " + level.getFCount(), 10, 60);
+			
+			if ( err ) {
+				g.drawString("Game crashed !", 50, 120);
+			}
+			
 		}
 		g.dispose();
 		bs.show();
