@@ -13,6 +13,7 @@ public class Dummy extends Mob {
 	 * right = new AnimatedSprite(SpriteSheet.player_right, 3);
 	 */
 
+
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.wanderer_down, 3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.wanderer_up, 3);
 	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.wanderer_left, 3);
@@ -26,7 +27,7 @@ public class Dummy extends Mob {
 	public Dummy(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
-		sprite = Sprite.player0;
+		this.sprite = Sprite.player0;
 	}
 
 	public void update() {

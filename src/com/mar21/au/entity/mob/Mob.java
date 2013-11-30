@@ -4,12 +4,14 @@ import com.mar21.au.entity.Entity;
 import com.mar21.au.entity.projectile.HoleProjectile;
 import com.mar21.au.entity.projectile.Projectile;
 import com.mar21.au.graphics.Screen;
+import com.mar21.au.graphics.Sprite;
 
 public abstract class Mob extends Entity {
 
 	protected int dir = 0;
 	protected int rate = 0;
 	protected double walkspeed = 0;
+	protected Sprite sprite;
 
 	public void move(double xa, double ya) {
 		if (xa != 0 && ya != 0) {
@@ -25,12 +27,12 @@ public abstract class Mob extends Entity {
 
 		while (xa != 0) {
 			if (Math.abs(xa) > 1) {
-				if (!collision(abs(xa), ya)) {
+				if (!collision(abs(xa), ya, sprite)) {
 					this.x += abs(xa);
 				}
 				xa -= abs(xa);
 			} else {
-				if (!collision(abs(xa), ya)) {
+				if (!collision(abs(xa), ya, sprite)) {
 					this.x += xa;
 				}
 				xa = 0;
@@ -39,12 +41,12 @@ public abstract class Mob extends Entity {
 
 		while (ya != 0) {
 			if (Math.abs(ya) > 1) {
-				if (!collision(xa, abs(ya))) {
+				if (!collision(xa, abs(ya), sprite)) {
 					this.y += abs(ya);
 				}
 				ya -= abs(ya);
 			} else {
-				if (!collision(xa, abs(ya))) {
+				if (!collision(xa, abs(ya), sprite)) {
 					this.y += ya;
 				}
 				ya = 0;
@@ -79,11 +81,11 @@ public abstract class Mob extends Entity {
 
 	}
 
-	private boolean collision(double xa, double ya) {
+	private boolean collision(double xa, double ya, Sprite sprite) {
 		boolean solid = false;
 		for (int c = 0; c < 4; c++) {
-			double xt = ((x + xa) + c % 2 * 16 - 16) / 16;
-			double yt = ((y + ya) + c / 2 * 0) / 16;
+			double xt = ((x + xa) + c % 2 * (sprite.getW() / 2) - (sprite.getW() / 2)) / (sprite.getW() / 2);
+			double yt = ((y + ya) + c / 2 * 0) / 32;
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);
 			if (c % 2 == 0) ix = (int) Math.floor(xt);

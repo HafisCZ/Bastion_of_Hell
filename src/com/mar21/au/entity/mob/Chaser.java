@@ -20,7 +20,7 @@ public class Chaser extends Mob {
 		this.x = x << 4;
 		this.y = y << 4;
 		this.walkspeed = 1;
-		sprite = Sprite.player0;
+		this.sprite = Sprite.player0;
 	}
 
 	private void move() {

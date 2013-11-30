@@ -14,7 +14,6 @@ public class Player extends Mob {
 
 	private double classSpeed = 1;
 	private Keyboard input;
-	private Sprite sprite;
 	private int anim = 0;
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 3);
@@ -25,7 +24,7 @@ public class Player extends Mob {
 	public Player(Keyboard input) {
 		this.input = input;
 		this.walkspeed = classSpeed;
-		sprite = Sprite.player0;
+		this.sprite = Sprite.player0;
 		resetsh(HoleProjectile.RATE);
 	}
 
