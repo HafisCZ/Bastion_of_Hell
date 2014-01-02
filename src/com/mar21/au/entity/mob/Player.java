@@ -12,7 +12,7 @@ import com.mar21.au.input.Mouse;
 
 public class Player extends Mob {
 
-	private double classSpeed = 1;
+	private double classSpeed = 2;
 	private Keyboard input;
 	private int anim = 0;
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 3);
