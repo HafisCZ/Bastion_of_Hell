@@ -27,8 +27,10 @@ public class Level {
 
 	private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		public int compare(Node n0, Node n1) {
-			if (n1.fCost < n0.fCost) return +1;
-			if (n1.fCost > n0.fCost) return -1;
+			if (n1.fCost < n0.fCost)
+				return +1;
+			if (n1.fCost > n0.fCost)
+				return -1;
 			return 0;
 		}
 	};
@@ -90,20 +92,26 @@ public class Level {
 			openList.remove(current);
 			closedList.add(current);
 			for (int i = 0; i < 9; i++) {
-				if (i == 4) continue;
+				if (i == 4)
+					continue;
 				int x = current.tile.getX();
 				int y = current.tile.getY();
 				int xi = (i % 3) - 1;
 				int yi = (i / 3) - 1;
 				Tile at = getTile(x + xi, y + yi);
-				if (at == null) continue;
-				if (at.solid()) continue;
+				if (at == null)
+					continue;
+				if (at.solid())
+					continue;
 				Vector2i a = new Vector2i(x + xi, y + yi);
-				double gCost = current.gCost + getDistance(current.tile, a);
+				double gCost = current.gCost
+						+ (getDistance(current.tile, a) == 1 ? 1 : 0.95);
 				double hCost = getDistance(a, goal);
 				Node node = new Node(a, current, gCost, hCost);
-				if (vecInList(closedList, a) && gCost >= node.gCost) continue;
-				if (!vecInList(openList, a) || gCost < node.gCost) openList.add(node);
+				if (vecInList(closedList, a) && gCost >= node.gCost)
+					continue;
+				if (!vecInList(openList, a) || gCost < node.gCost)
+					openList.add(node);
 			}
 		}
 		closedList.clear();
@@ -112,7 +120,8 @@ public class Level {
 
 	private boolean vecInList(List<Node> list, Vector2i vector) {
 		for (Node n : list) {
-			if (n.tile.equals(vector)) return true;
+			if (n.tile.equals(vector))
+				return true;
 		}
 		return false;
 	}
@@ -157,16 +166,20 @@ public class Level {
 
 	private void remove() {
 		for (int i = 0; i < entities.size(); i++) {
-			if (entities.get(i).isRemoved()) entities.remove(i);
+			if (entities.get(i).isRemoved())
+				entities.remove(i);
 		}
 		for (int i = 0; i < projectiles.size(); i++) {
-			if (projectiles.get(i).isRemoved()) projectiles.remove(i);
+			if (projectiles.get(i).isRemoved())
+				projectiles.remove(i);
 		}
 		for (int i = 0; i < particles.size(); i++) {
-			if (particles.get(i).isRemoved()) particles.remove(i);
+			if (particles.get(i).isRemoved())
+				particles.remove(i);
 		}
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).isRemoved()) players.remove(i);
+			if (players.get(i).isRemoved())
+				players.remove(i);
 		}
 	}
 
@@ -193,21 +206,29 @@ public class Level {
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
 				if (getTile(x, y).layer()) {
-					if (getTile(x - 1, y) != Tile.voidTile && getTile(x - 1, y) != getTile(x, y)) {
+					if (getTile(x - 1, y) != Tile.voidTile
+							&& getTile(x - 1, y) != getTile(x, y)) {
 						getTile(x - 1, y).render(x, y, screen);
-					} else if (getTile(x + 1, y) != Tile.voidTile && getTile(x + 1, y) != getTile(x, y)) {
+					} else if (getTile(x + 1, y) != Tile.voidTile
+							&& getTile(x + 1, y) != getTile(x, y)) {
 						getTile(x + 1, y).render(x, y, screen);
-					} else if (getTile(x, y - 1) != Tile.voidTile && getTile(x, y - 1) != getTile(x, y)) {
+					} else if (getTile(x, y - 1) != Tile.voidTile
+							&& getTile(x, y - 1) != getTile(x, y)) {
 						getTile(x, y - 1).render(x, y, screen);
-					} else if (getTile(x, y + 1) != Tile.voidTile && getTile(x, y + 1) != getTile(x, y)) {
+					} else if (getTile(x, y + 1) != Tile.voidTile
+							&& getTile(x, y + 1) != getTile(x, y)) {
 						getTile(x, y + 1).render(x, y, screen);
-					} else if (getTile(x + 2, y) != Tile.voidTile && getTile(x + 2, y) != getTile(x, y)) {
+					} else if (getTile(x + 2, y) != Tile.voidTile
+							&& getTile(x + 2, y) != getTile(x, y)) {
 						getTile(x + 2, y).render(x, y, screen);
-					} else if (getTile(x - 2, y) != Tile.voidTile && getTile(x - 2, y) != getTile(x, y)) {
+					} else if (getTile(x - 2, y) != Tile.voidTile
+							&& getTile(x - 2, y) != getTile(x, y)) {
 						getTile(x - 2, y).render(x, y, screen);
-					} else if (getTile(x, y - 2) != Tile.voidTile && getTile(x, y - 2) != getTile(x, y)) {
+					} else if (getTile(x, y - 2) != Tile.voidTile
+							&& getTile(x, y - 2) != getTile(x, y)) {
 						getTile(x, y - 2).render(x, y, screen);
-					} else if (getTile(x, y + 2) != Tile.voidTile && getTile(x, y + 2) != getTile(x, y)) {
+					} else if (getTile(x, y + 2) != Tile.voidTile
+							&& getTile(x, y + 2) != getTile(x, y)) {
 						getTile(x, y + 2).render(x, y, screen);
 					} else {
 						Tile.voidTile.render(x, y, screen);
@@ -232,22 +253,38 @@ public class Level {
 	}
 
 	public Tile getTile(int x, int y) {
-		if (x < 0 || y < 0 || x >= width || y >= height) { return Tile.voidTile; }
-		if (tiles[x + y * width] == 0xFFFF0000) { return Tile.grass; }
-		if (tiles[x + y * width] == 0xFFFFFF00) { return Tile.grass1; }
-		if (tiles[x + y * width] == 0xFF00FFFF) { return Tile.grass2; }
-		if (tiles[x + y * width] == 0xFF000000) { return Tile.rock; }
-		if (tiles[x + y * width] == 0xFFFF6A00) { return Tile.planks; }
-		if (tiles[x + y * width] == 0xFFFFD800) { return Tile.doors; }
+		if (x < 0 || y < 0 || x >= width || y >= height) {
+			return Tile.voidTile;
+		}
+		if (tiles[x + y * width] == 0xFFFF0000) {
+			return Tile.grass;
+		}
+		if (tiles[x + y * width] == 0xFFFFFF00) {
+			return Tile.grass1;
+		}
+		if (tiles[x + y * width] == 0xFF00FFFF) {
+			return Tile.grass2;
+		}
+		if (tiles[x + y * width] == 0xFF000000) {
+			return Tile.rock;
+		}
+		if (tiles[x + y * width] == 0xFFFF6A00) {
+			return Tile.planks;
+		}
+		if (tiles[x + y * width] == 0xFFFFD800) {
+			return Tile.doors;
+		}
 		return Tile.voidTile;
 	}
 
-	public boolean tileCollision(double x, double y, double xa, double ya, int size) {
+	public boolean tileCollision(double x, double y, double xa, double ya,
+			int size) {
 		boolean solid = false;
 		for (int c = 0; c < 4; c++) {
 			int xt = (((int) x + (int) xa) + c % 2 * size / 10) / 16;
 			int yt = (((int) y + (int) ya) + c / 2 * size / 6 + 2) / 16;
-			if (getTile(xt, yt).solid()) solid = true;
+			if (getTile(xt, yt).solid())
+				solid = true;
 		}
 		return solid;
 	}
@@ -257,7 +294,8 @@ public class Level {
 		for (int c = 0; c < 4; c++) {
 			int xt = (x - c % 2 * size + xo) >> 4;
 			int yt = (y - c / 2 * size + yo) >> 4;
-			if (getTile(xt, yt).solid()) solid = true;
+			if (getTile(xt, yt).solid())
+				solid = true;
 		}
 		return solid;
 	}
