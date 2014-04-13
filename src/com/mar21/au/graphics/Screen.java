@@ -55,13 +55,15 @@ public class Screen {
 			int ya = y + yp;
 			for (int x = 0; x < sprite.getW(); x++) {
 				int xa = x + xp;
-				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height)
+					continue;
 				pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getW()];
 			}
 		}
 	}
 
-	public void renderSpriteSheet(int xp, int yp, SpriteSheet sheet, boolean fixed, boolean transparency) {
+	public void renderSpriteSheet(int xp, int yp, SpriteSheet sheet,
+			boolean fixed, boolean transparency) {
 		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
@@ -70,8 +72,11 @@ public class Screen {
 			int ya = y + yp;
 			for (int x = 0; x < sheet.WIDTH; x++) {
 				int xa = x + xp;
-				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-				if (transparency && sheet.pixels[x + y * sheet.WIDTH] == 0xffff00ff) continue;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height)
+					continue;
+				if (transparency
+						&& sheet.pixels[x + y * sheet.WIDTH] == 0xffff00ff)
+					continue;
 				pixels[xa + ya * width] = sheet.pixels[x + y * sheet.WIDTH];
 			}
 		}
@@ -84,10 +89,13 @@ public class Screen {
 			int ya = y + yp;
 			for (int x = 0; x < tile.sprite.getW(); x++) {
 				int xa = x + xp;
-				if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
 				if (tile.sprite.pixels[x + y * tile.sprite.getW()] != 0xffff00ff) {
-					pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.getW()];
+					pixels[xa + ya * width] = tile.sprite.pixels[x + y
+							* tile.sprite.getW()];
 				}
 			}
 		}
@@ -100,8 +108,10 @@ public class Screen {
 			int ya = y + yp;
 			for (int x = 0; x < sprite.getW(); x++) {
 				int xa = x + xp;
-				if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
 				pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getW()];
 			}
 		}
@@ -114,10 +124,14 @@ public class Screen {
 			int ya = y + yp;
 			for (int x = 0; x < sprite.getW(); x++) {
 				int xa = x + xp;
-				if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				if (transparent && sprite.pixels[x + y * sprite.getW()] != 0xffff00ff) {
-					pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getW()];
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
+				if (transparent
+						&& sprite.pixels[x + y * sprite.getW()] != 0xffff00ff) {
+					pixels[xa + ya * width] = sprite.pixels[x + y
+							* sprite.getW()];
 				}
 			}
 		}
@@ -132,10 +146,13 @@ public class Screen {
 			for (int x = 0; x < sprite.getW(); x++) {
 				int xa = x + xp;
 				int xs = x;
-				if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
 				int col = sprite.pixels[xs + ys * sprite.getW()];
-				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
+				if (col != 0xffff00ff)
+					pixels[xa + ya * width] = col;
 			}
 		}
 	}
@@ -155,10 +172,13 @@ public class Screen {
 				if (flip == 1 || flip == 3) {
 					xs = sprite.getW() - (x + 1);
 				}
-				if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
 				int col = sprite.pixels[xs + ys * sprite.getW()];
-				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
+				if (col != 0xffff00ff)
+					pixels[xa + ya * width] = col;
 			}
 		}
 	}
@@ -172,10 +192,13 @@ public class Screen {
 			for (int x = 0; x < sprite.getW(); x++) {
 				int xa = x + xp;
 				int xs = x;
-				if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
 				int col = sprite.pixels[xs + ys * sprite.getW()];
-				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
+				if (col != 0xffff00ff)
+					pixels[xa + ya * width] = col;
 			}
 		}
 	}
@@ -194,13 +217,17 @@ public class Screen {
 			for (int x = 0; x < mob.getSprite().getW(); x++) {
 				int xa = x + xp;
 				int xs = x;
-				if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				int col = mob.getSprite().pixels[xs + ys * mob.getSprite().getW()];
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
+				int col = mob.getSprite().pixels[xs + ys
+						* mob.getSprite().getW()];
 				if (mob instanceof Chaser && col == 0xff303030) {
 					col = 0xffBA0015;
 				}
-				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
+				if (col != 0xffff00ff)
+					pixels[xa + ya * width] = col;
 			}
 		}
 	}
@@ -214,11 +241,16 @@ public class Screen {
 			for (int x = 0; x < mob.getSprite().getW(); x++) {
 				int xa = x + xp;
 				int xs = x;
-				if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				int col = mob.getSprite().pixels[xs + ys * mob.getSprite().getW()];
-				if (col == fromCol) col = toCol;
-				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
+				int col = mob.getSprite().pixels[xs + ys
+						* mob.getSprite().getW()];
+				if (col == fromCol)
+					col = toCol;
+				if (col != 0xffff00ff)
+					pixels[xa + ya * width] = col;
 			}
 		}
 	}
@@ -232,16 +264,49 @@ public class Screen {
 			for (int x = 0; x < mob.getSprite().getW(); x++) {
 				int xa = x + xp;
 				int xs = x;
-				if (xa < -32 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				int col = mob.getSprite().pixels[xs + ys * mob.getSprite().getW()];
+				if (xa < -32 || xa >= width || ya < 0 || ya >= height)
+					break;
+				if (xa < 0)
+					xa = 0;
+				int col = mob.getSprite().pixels[xs + ys
+						* mob.getSprite().getW()];
 				if (fromCol.length == toCol.length) {
 					for (int i = 0; i < fromCol.length; i++) {
-						if (col == fromCol[i]) col = toCol[i];
+						if (col == fromCol[i])
+							col = toCol[i];
 					}
 				}
-				if (col != 0xffff00ff) pixels[xa + ya * width] = col;
+				if (col != 0xffff00ff)
+					pixels[xa + ya * width] = col;
 			}
+		}
+	}
+
+	public void drawRect(int xp, int yp, int width, int height, int color,
+			boolean fixed) {
+		if (fixed) {
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		for (int x = xp; x < xp + width; x++) {
+			if (x < 0 || x >= this.width || yp >= this.height)
+				continue;
+			if (yp > 0)
+				pixels[x + yp * this.width] = color;
+			if (yp + height >= this.height)
+				continue;
+			if (yp + height > 0)
+				pixels[x + (yp + height) * this.width] = color;
+		}
+		for (int y = yp; y <= yp + height; y++) {
+			if (xp >= this.width || y < 0 || y >= this.height)
+				continue;
+			if (xp > 0)
+				pixels[xp + y * this.width] = color;
+			if (xp + width >= this.width)
+				continue;
+			if (xp + width > 0)
+				pixels[(xp + width) + y * this.width] = color;
 		}
 	}
 }

@@ -306,6 +306,7 @@ public class Level {
 		int b = (int) e.getY();
 		for (int i = 0; i < entities.size(); i++) {
 			Entity f = entities.get(i);
+			if (f.equals(e)) continue;
 			int x = (int) f.getX();
 			int y = (int) f.getY();
 			int dx = Math.abs(x - a);
