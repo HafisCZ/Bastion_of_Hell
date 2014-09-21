@@ -13,7 +13,6 @@ public class Dummy extends Mob {
 	 * right = new AnimatedSprite(SpriteSheet.player_right, 3);
 	 */
 
-
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.wanderer_down, 3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.wanderer_up, 3);
 	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.wanderer_left, 3);
@@ -42,7 +41,7 @@ public class Dummy extends Mob {
 				ya = 0;
 			}
 		}
-		
+
 		xa *= walkspeed;
 		ya *= walkspeed;
 

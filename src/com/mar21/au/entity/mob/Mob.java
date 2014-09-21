@@ -25,14 +25,10 @@ public abstract class Mob extends Entity {
 			return;
 		}
 
-		if (xa > 0)
-			dir = 1;
-		if (xa < 0)
-			dir = 3;
-		if (ya > 0)
-			dir = 2;
-		if (ya < 0)
-			dir = 0;
+		if (xa > 0) dir = 1;
+		if (xa < 0) dir = 3;
+		if (ya > 0) dir = 2;
+		if (ya < 0) dir = 0;
 
 		while (xa != 0) {
 			if (Math.abs(xa) > 1) {
@@ -65,23 +61,21 @@ public abstract class Mob extends Entity {
 	}
 
 	private int abs(double value) {
-		if (value < 0)
-			return -1;
+		if (value < 0) return -1;
 		return 1;
 	}
 
 	public abstract void update();
 
 	protected void updatesh(int skip) {
-		if (rate > 0)
-			rate -= skip;
+		if (rate > 0) rate -= skip;
 	}
 
 	protected void resetsh(int rate) {
 		this.rate = rate;
 	}
 
-	protected void shootRandom(int range, int tick) {
+	public void shootRandom(int range, int tick, int shoot_delay) {
 		if (tick % (60 + random.nextInt(61)) == 0) {
 			List<Entity> entities = level.getEntities(this, range);
 			entities.add(level.getClientPlayer());
@@ -90,29 +84,28 @@ public abstract class Mob extends Entity {
 			lock_entity = entities.get(index);
 		}
 
-		if (lock_entity != null) {
+		if (lock_entity != null && tick % shoot_delay == 0) {
 			double dx = lock_entity.getX() - x;
 			double dy = lock_entity.getY() - y;
 			double dir = Math.atan2(dy, dx);
-			shoot(x + 16, y + 16, dir, 0);
+			shoot(x, y, dir, 0);
 		}
 	}
 
-	protected void shootClosest(int range) {
+	protected void shootClosest(int range, int tick, int shoot_delay) {
 		List<Entity> entities = level.getEntities(this, range);
 		entities.add(level.getClientPlayer());
 		double min = 0;
 		Entity closest = null;
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
-			double distance = Vector2i.getDistance(new Vector2i(x, y),
-					new Vector2i(e.getX(), e.getY()));
+			double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i(e.getX(), e.getY()));
 			if (i == 0 || distance < min) {
 				min = distance;
 				closest = e;
 			}
 		}
-		if (closest != null) {
+		if (closest != null && tick % shoot_delay == 0) {
 			double dx = closest.getX() - x;
 			double dy = closest.getY() - y;
 			double dir = Math.atan2(dy, dx);
@@ -138,12 +131,9 @@ public abstract class Mob extends Entity {
 			double yt = ((y + ya) - c / 2 * 15) / 16;
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);
-			if (c % 2 == 0)
-				ix = (int) Math.floor(xt);
-			if (c / 2 == 0)
-				iy = (int) Math.floor(yt);
-			if (level.getTile(ix, iy).solid())
-				solid = true;
+			if (c % 2 == 0) ix = (int) Math.floor(xt);
+			if (c / 2 == 0) iy = (int) Math.floor(yt);
+			if (level.getTile(ix, iy).solid()) solid = true;
 		}
 		return solid;
 	}

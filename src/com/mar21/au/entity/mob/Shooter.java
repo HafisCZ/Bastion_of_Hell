@@ -1,24 +1,16 @@
 package com.mar21.au.entity.mob;
 
-import java.util.List;
-
-import com.mar21.au.entity.Entity;
 import com.mar21.au.graphics.AnimatedSprite;
 import com.mar21.au.graphics.Screen;
 import com.mar21.au.graphics.Sprite;
 import com.mar21.au.graphics.SpriteSheet;
-import com.mar21.au.util.Debug;
-import com.mar21.au.util.Vector2i;
 
 public class Shooter extends Mob {
 
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.wanderer_down,
-			3);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.wanderer_down, 3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.wanderer_up, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.wanderer_left,
-			3);
-	private AnimatedSprite right = new AnimatedSprite(
-			SpriteSheet.wanderer_right, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.wanderer_left, 3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.wanderer_right, 3);
 
 	private AnimatedSprite animSprite = down;
 
@@ -29,7 +21,7 @@ public class Shooter extends Mob {
 		this.x = x << 4;
 		this.y = y << 4;
 		this.sprite = Sprite.player0;
-		this.walkspeed = 0;
+		this.walkspeed = 1;
 	}
 
 	public void update() {
@@ -67,13 +59,12 @@ public class Shooter extends Mob {
 			moving = false;
 		}
 
-		shootRandom(100, time);
+		shootRandom(500, time, 50);
 	}
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		//Debug.drawRect(screen, 40, 40, 100, 40, 0xff00ff, true);
-		screen.renderMob(x, y, sprite);
+		screen.renderMob((int) x - sprite.getW() / 2, (int) y - sprite.getH() / 2, sprite);
 	}
 
 }
